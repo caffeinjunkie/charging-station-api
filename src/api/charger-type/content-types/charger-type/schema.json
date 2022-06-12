@@ -1,0 +1,21 @@
+{
+  "kind": "collectionType",
+  "collectionName": "charger_types",
+  "info": {
+    "singularName": "charger-type",
+    "pluralName": "charger-types",
+    "displayName": "ChargerType",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "type": {
+      "type": "string",
+      "required": true,
+      "unique": true
+    }
+  }
+}
