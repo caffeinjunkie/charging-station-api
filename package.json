@@ -7,13 +7,19 @@
     "develop": "strapi develop",
     "start": "strapi start",
     "build": "strapi build",
-    "strapi": "strapi"
+    "strapi": "strapi",
+    "lint": "eslint ."
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "@babel/eslint-parser": "^7.18.2",
+    "eslint": "^8.17.0",
+    "prettier": "^2.6.2"
+  },
   "dependencies": {
-    "@strapi/strapi": "4.1.12",
-    "@strapi/plugin-users-permissions": "4.1.12",
+    "@strapi/plugin-graphql": "^4.1.12",
     "@strapi/plugin-i18n": "4.1.12",
+    "@strapi/plugin-users-permissions": "4.1.12",
+    "@strapi/strapi": "4.1.12",
     "better-sqlite3": "7.4.6"
   },
   "author": {
