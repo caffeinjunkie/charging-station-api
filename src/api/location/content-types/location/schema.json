@@ -1,0 +1,50 @@
+{
+  "kind": "collectionType",
+  "collectionName": "locations",
+  "info": {
+    "singularName": "location",
+    "pluralName": "locations",
+    "displayName": "Location",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "name": {
+      "type": "string",
+      "required": true,
+      "maxLength": 25
+    },
+    "city": {
+      "type": "string",
+      "required": true,
+      "maxLength": 25
+    },
+    "postal_code": {
+      "type": "string",
+      "required": true,
+      "maxLength": 7,
+      "minLength": 4
+    },
+    "country": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::country.country"
+    },
+    "chargers": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::charger.charger"
+    },
+    "location_no": {
+      "type": "string",
+      "maxLength": 6,
+      "minLength": 6,
+      "required": true,
+      "regex": "^(0|[1-9][0-9]*)$",
+      "unique": true
+    }
+  }
+}

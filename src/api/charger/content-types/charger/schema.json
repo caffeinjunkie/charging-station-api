@@ -1,0 +1,42 @@
+{
+  "kind": "collectionType",
+  "collectionName": "chargers",
+  "info": {
+    "singularName": "charger",
+    "pluralName": "chargers",
+    "displayName": "Charger",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "type": {
+      "type": "enumeration",
+      "enum": [
+        "HPC",
+        "T52",
+        "T53C"
+      ],
+      "required": true
+    },
+    "status": {
+      "type": "enumeration",
+      "enum": [
+        "CONNECTED",
+        "NOT_CONNECTED",
+        "REMOVED"
+      ],
+      "required": true
+    },
+    "serial_number": {
+      "type": "string",
+      "required": true,
+      "unique": true,
+      "maxLength": 9,
+      "minLength": 9,
+      "regex": "^[a-zA-Z0-9]*$"
+    }
+  }
+}
