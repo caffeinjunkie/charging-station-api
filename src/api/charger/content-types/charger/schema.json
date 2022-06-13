@@ -8,7 +8,7 @@
     "description": ""
   },
   "options": {
-    "draftAndPublish": true
+    "draftAndPublish": false
   },
   "pluginOptions": {},
   "attributes": {
@@ -30,7 +30,7 @@
       ],
       "required": true
     },
-    "serial_number": {
+    "serialNumber": {
       "type": "string",
       "required": true,
       "unique": true,
