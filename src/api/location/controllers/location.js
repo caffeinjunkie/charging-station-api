@@ -13,7 +13,17 @@ const chargerUID = 'api::charger.charger';
 module.exports = createCoreController(locationUID, ({strapi}) => ({
     async create(ctx) {
       const { body } = ctx.request;
-      const { chargers } = body;
+      const { chargers = [], locationNo } = body;
+
+      const isExist = await strapi.db.query(locationUID).findOne({ where: { locationNo }});
+      if (isExist) {
+        return {
+          data: { error: {
+            formKey: 'locationNo',
+            messageKey: 'ErrorMessage-locationNo-required-text'
+          }}
+        }
+      }
 
       const savedChargers = await Promise.all(chargers.map(async (charger) => {
         const { id } = await strapi.db.query(chargerUID).create({ data: charger });
@@ -35,7 +45,12 @@ module.exports = createCoreController(locationUID, ({strapi}) => ({
         }});
       });
 
-      return true;
+      return {
+        data: {
+          savedLocation,
+          error: null
+        }
+      };
     }
   })
 );
