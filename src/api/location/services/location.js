@@ -6,4 +6,6 @@
 
 const { createCoreService } = require('@strapi/strapi').factories;
 
-module.exports = createCoreService('api::location.location');
+const apiUid = 'api::location.location';
+
+module.exports = createCoreService(apiUid)

@@ -37,6 +37,9 @@
       "maxLength": 9,
       "minLength": 9,
       "regex": "^[a-zA-Z0-9]*$"
+    },
+    "locationId": {
+      "type": "string"
     }
   }
 }

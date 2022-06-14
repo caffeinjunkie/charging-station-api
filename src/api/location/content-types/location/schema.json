@@ -31,12 +31,14 @@
     "country": {
       "type": "relation",
       "relation": "oneToOne",
-      "target": "api::country.country"
+      "target": "api::country.country",
+      "required": true
     },
     "chargers": {
       "type": "relation",
       "relation": "oneToMany",
-      "target": "api::charger.charger"
+      "target": "api::charger.charger",
+      "required": true
     },
     "locationNo": {
       "type": "string",
