@@ -21,4 +21,11 @@ yarn start
 ```
 
 ### `note`
-If you're not running on Strapi's default port (1337), change the port on Charging Station Web config files to match yours.
+If you're not running on Strapi's default port (1337), change the port on Charging Station Web config file to match yours.
+
+```
+charging-station-web
+└───src    
+    └───config
+         └───index.ts
+```
