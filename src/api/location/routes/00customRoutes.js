@@ -7,6 +7,14 @@ module.exports = {
       config: {
         auth: false
       }
+    },
+    {
+      method: 'POST',
+      path: '/locations/:id',
+      handler: 'location.update',
+      config: {
+        auth: false
+      }
     }
   ]
 }
