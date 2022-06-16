@@ -15,6 +15,14 @@ module.exports = {
       config: {
         auth: false
       }
+    },
+    {
+      method: 'DELETE',
+      path: '/locations/:id',
+      handler: 'location.delete',
+      config: {
+        auth: false
+      }
     }
   ]
 }

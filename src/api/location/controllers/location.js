@@ -15,10 +15,31 @@ const errorResponse = {
 }
 
 module.exports = createCoreController(locationUID, ({strapi}) => ({
+    async delete(ctx) {
+      const { id } = ctx.params;
+      const populate = {
+        chargers: {
+          accessory: false
+        }
+      };
+
+      const location = await strapi.db.query(locationUID).findOne({ where: { id }, populate });
+      const { chargers } = location;
+      await Promise.all(chargers.map(async (charger) => {
+        await strapi.db.query(chargerUID).delete({ where: { id: charger.id } });
+      }));
+
+      return strapi.db.query(locationUID).delete({ where: { id } });
+    },
     async update(ctx) {
       const { body } = ctx.request;
-      const { id, locationNo } = body;
-      const existingLocation = await strapi.db.query(locationUID).findOne({ where: { id }});
+      const { id, locationNo, chargers } = body;
+      const populate = {
+        chargers: {
+          accessory: false
+        }
+      };
+      const existingLocation = await strapi.db.query(locationUID).findOne({ where: { id }, populate });
       if (existingLocation.locationNo !== locationNo) {
         const isLocationNoExist = await strapi.db.query(locationUID).findOne({ where: { locationNo }});
         if (isLocationNoExist) {
@@ -26,9 +47,16 @@ module.exports = createCoreController(locationUID, ({strapi}) => ({
         }
       }
 
-      //save charger first, get charger ID and map body then use body as param for update
+      const { chargers: existingChargers } = existingLocation;
+      const removedChargers = existingChargers.filter(charger => !chargers.includes(charger.id.toString()));
 
-      const updateResponse = await strapi.db.query(locationUID).update({ where: { id }, data: {...body} });
+      if (removedChargers.length > 0) {
+        await Promise.all(removedChargers.map(async (charger) => {
+          await strapi.db.query(chargerUID).delete({ where: { id: charger.id } });
+        }));
+      }
+
+      const updateResponse = await strapi.db.query(locationUID).update({ where: { id }, data: body });
       console.log(updateResponse)
 
       return {
@@ -40,32 +68,14 @@ module.exports = createCoreController(locationUID, ({strapi}) => ({
     },
     async create(ctx) {
       const { body } = ctx.request;
-      const { chargers = [], locationNo } = body;
+      const { locationNo } = body;
 
       const isExist = await strapi.db.query(locationUID).findOne({ where: { locationNo }});
       if (isExist) {
         return { data: { error: errorResponse } }
       }
 
-      const savedChargers = await Promise.all(chargers.map(async (charger) => {
-        const { id } = await strapi.db.query(chargerUID).create({ data: charger });
-        return id.toString();
-      }));
-
-      const bodyPayload = {
-        ...body,
-        chargers: savedChargers
-      };
-
-      const savedLocation = await strapi.db.query(locationUID).create({ data: bodyPayload });
-
-      savedChargers.forEach((id) => {
-        strapi.db.query(chargerUID).update({
-        where: { id },
-        data: {
-          locationId: savedLocation.id
-        }});
-      });
+      const savedLocation = await strapi.db.query(locationUID).create({ data: body });
 
       return {
         data: {
