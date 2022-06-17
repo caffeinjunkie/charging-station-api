@@ -40,3 +40,4 @@ charging-station-web
     └───config
          └───index.ts
 ```
+I've provided the the .env and data.db in the attachhment. This db file contains some existing locations as well as the necessary data for Country and Charger Type as it runs locally
