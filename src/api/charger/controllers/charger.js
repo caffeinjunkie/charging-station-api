@@ -19,7 +19,7 @@ module.exports = createCoreController(chargerUID, ({strapi}) => ({
 
     return {
       isExist: !isNull(charger)
-    }
+    };
   },
   async create(ctx) {
     const { body: { type, status, serialNumber } } = ctx.request;
@@ -27,10 +27,10 @@ module.exports = createCoreController(chargerUID, ({strapi}) => ({
       type: type.name,
       status: status.name,
       serialNumber
-    }
+    };
 
     const response = await strapi.db.query(chargerUID).create({ data: requestBody });
-    console.log(response)
+    console.log(response);
 
     return {
       data: response
@@ -42,7 +42,7 @@ module.exports = createCoreController(chargerUID, ({strapi}) => ({
       type: type.name,
       status: status.name,
       serialNumber
-    }
+    };
 
     const response = await strapi.db.query(chargerUID).update({ where: { id }, data: requestBody });
 
