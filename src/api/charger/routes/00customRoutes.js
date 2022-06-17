@@ -23,6 +23,14 @@ module.exports = {
       config: {
         auth: false
       }
-    }
+    },
+    {
+      method: 'POST',
+      path: '/delete-chargers',
+      handler: 'charger.delete',
+      config: {
+        auth: false
+      }
+    },
   ]
 }

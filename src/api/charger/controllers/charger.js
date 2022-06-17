@@ -49,5 +49,12 @@ module.exports = createCoreController(chargerUID, ({strapi}) => ({
     return {
       data: response
     };
-  }
+  },
+  async delete(ctx) {
+    const { body: { chargers } } = ctx.request;
+
+    return Promise.all(chargers.map(async (charger) => {
+      await strapi.db.query(chargerUID).delete({ where: { id: charger.id } });
+    }));
+  },
 }));
