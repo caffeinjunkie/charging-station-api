@@ -20,6 +20,17 @@ yarn start
 
 ```
 
+### `additional`
+
+You can also run eslint (with prettier plugin)
+
+```
+npm run lint
+# or
+yarn lint
+
+```
+
 ### `note`
 If you're not running on Strapi's default port (1337), change the port on Charging Station Web config file to match yours.
 
