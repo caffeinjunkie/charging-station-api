@@ -24,8 +24,8 @@ module.exports = createCoreController(chargerUID, ({strapi}) => ({
   async create(ctx) {
     const { body: { type, status, serialNumber } } = ctx.request;
     const requestBody = {
-      type: type.name,
-      status: status.name,
+      type,
+      status,
       serialNumber
     }
 
@@ -39,8 +39,8 @@ module.exports = createCoreController(chargerUID, ({strapi}) => ({
   async update(ctx) {
     const { body: { id, type, status, serialNumber } } = ctx.request;
     const requestBody = {
-      type: type.name,
-      status: status.name,
+      type,
+      status,
       serialNumber
     }
 
