@@ -9,6 +9,10 @@ npm install
 yarn install
 ```
 
+Before starting the project, I've provided the the .env and data.db in the attachhment. This db file contains some existing locations as well as the necessary data for Country and Charger Type as it runs locally.
+Put the .env file inside the root directory of the project, and the data.db inside .tmp folder (it's hidden, but you can put it directly when opening the IDE). After you set up the .env and data.db files you can start the application.
+
+
 ### `start`
 
 Start your Strapi application
@@ -40,4 +44,3 @@ charging-station-web
     └───config
          └───index.ts
 ```
-I've provided the the .env and data.db in the attachhment. This db file contains some existing locations as well as the necessary data for Country and Charger Type as it runs locally
