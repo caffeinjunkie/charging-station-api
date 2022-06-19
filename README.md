@@ -10,7 +10,9 @@ yarn install
 ```
 
 Before starting the project, I've provided the the ```.env``` and ```data.db``` inside the attachhment. This db file contains some existing locations as well as the necessary data for ```Country``` and ```ChargerType``` as it runs locally.
-Put the ```.env``` file inside the root directory of the project, and the ```data.db``` inside ```.tmp``` folder (it's hidden, but you can put it directly when opening the IDE). After setting up the ```.env``` and ```data.db``` files you can start the application.
+1. Put the ```.env``` file inside the root directory of the project.
+2. Put the ```data.db``` inside ```.tmp``` folder (it's hidden, but you can put it directly when opening the IDE). Or if it's not there already, create ```.tmp``` folder and copy the ```data.db``` file there.
+3. After setting up the ```.env``` and ```data.db``` files you can start the application.
 
 
 ### `start`
