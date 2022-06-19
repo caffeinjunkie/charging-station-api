@@ -23,7 +23,6 @@ Start your Strapi application. You can open Strapi's admin dashboard at ```http:
 npm run start
 # or
 yarn start
-
 ```
 
 ### `additional`
@@ -34,7 +33,6 @@ You can also run eslint (with prettier plugin)
 npm run lint
 # or
 yarn lint
-
 ```
 
 ### `note`
