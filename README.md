@@ -17,7 +17,7 @@ Before starting the project, I've provided the the ```.env``` and ```data.db``` 
 
 ### `start`
 
-Start your Strapi application. You can open Strapi's admin dashboard at localhost:1337/admin, I've provided the login credentials inside the attachment.
+Start your Strapi application. You can open Strapi's admin dashboard at ```http://localhost:1337/admin```, I've provided the login credentials inside the attachment.
 
 ```
 npm run start
