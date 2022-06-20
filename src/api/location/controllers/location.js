@@ -32,7 +32,8 @@ module.exports = createCoreController(locationUID, ({strapi}) => ({
   },
   async update(ctx) {
     const { body } = ctx.request;
-    const { id, locationNo, chargers } = body;
+    const { deletedChargers, ...restOfBody } = body;
+    const { id, locationNo, chargers } = restOfBody;
     const populate = {
       chargers: {
         accessory: false
@@ -46,6 +47,10 @@ module.exports = createCoreController(locationUID, ({strapi}) => ({
       }
     }
 
+    await Promise.all(deletedChargers.map(async (charger) => {
+      await strapi.db.query(chargerUID).delete({ where: { id: charger.id } });
+    }));
+
     const { chargers: existingChargers } = existingLocation;
     const removedChargers = existingChargers.filter(charger => !chargers.includes(charger.id.toString()));
 
@@ -55,8 +60,7 @@ module.exports = createCoreController(locationUID, ({strapi}) => ({
       }));
     }
 
-    const updateResponse = await strapi.db.query(locationUID).update({ where: { id }, data: body });
-    console.log(updateResponse);
+    const updateResponse = await strapi.db.query(locationUID).update({ where: { id }, data: restOfBody });
 
     return {
       data: {
@@ -67,14 +71,18 @@ module.exports = createCoreController(locationUID, ({strapi}) => ({
   },
   async create(ctx) {
     const { body } = ctx.request;
-    const { locationNo } = body;
+    const { deletedChargers, ...restOfBody } = body;
 
-    const isExist = await strapi.db.query(locationUID).findOne({ where: { locationNo }});
+    const isExist = await strapi.db.query(locationUID).findOne({ where: { locationNo: body.locationNo }});
     if (isExist) {
       return { data: { error: errorResponse } };
     }
 
-    const savedLocation = await strapi.db.query(locationUID).create({ data: body });
+    await Promise.all(deletedChargers.map(async (charger) => {
+      await strapi.db.query(chargerUID).delete({ where: { id: charger.id } });
+    }));
+
+    const savedLocation = await strapi.db.query(locationUID).create({ data: restOfBody });
 
     return {
       data: {
@@ -83,5 +91,4 @@ module.exports = createCoreController(locationUID, ({strapi}) => ({
       }
     };
   }
-})
-);
+}));
