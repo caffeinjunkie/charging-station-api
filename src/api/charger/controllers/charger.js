@@ -30,7 +30,6 @@ module.exports = createCoreController(chargerUID, ({strapi}) => ({
     };
 
     const response = await strapi.db.query(chargerUID).create({ data: requestBody });
-    console.log(response);
 
     return {
       data: response
